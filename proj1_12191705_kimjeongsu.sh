@@ -40,7 +40,9 @@ do
 	6)
 		;;
 	7)
-		;;
+		echo "Bye!"
+		echo ""
+		exit 0;;
 	*)
 		echo "Error: Invalid option...";;
 	esac
