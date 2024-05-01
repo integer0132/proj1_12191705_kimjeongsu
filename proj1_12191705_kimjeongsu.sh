@@ -25,4 +25,24 @@ do
 	echo "7. Exit"
 	
 	read -p "Enter your CHOICE (1~7) : " menu_num
+
+	case "$menu_num" in
+	1)
+		;;
+	2)
+		;;
+	3)
+		;;
+	4)
+		;;
+	5)
+		;;
+	6)
+		;;
+	7)
+		;;
+	*)
+		echo "Error: Invalid option...";;
+	esac
+
 done
