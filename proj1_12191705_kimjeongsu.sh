@@ -41,7 +41,21 @@ do
 			continue
 		fi;;
 	2)
-		;;
+		read -p "What do you want to get the team data of league_position[1~20] : " func2_num
+		
+		if [ "$func2_num" -ge 1 ]
+		then
+			if [ "$func2_num" -le 20 ]
+			then
+				cat ./$1 | awk -F, -v f2=$func2_num '$6==f2{print f2, $1, $2/($2+$3+$4)}'
+			else
+				echo "Error: Invalid option..."
+				continue
+			fi
+		else
+			echo "Error: Invalid option..."
+			continue
+		fi;;
 	3)
 		;;
 	4)
