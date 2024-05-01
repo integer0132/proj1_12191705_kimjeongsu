@@ -28,7 +28,18 @@ do
 
 	case "$menu_num" in
 	1)
-		;;
+		read -p "Do you want to get the Heung-Min Son's data? (y/n) :" func1_yn
+
+		if [ "$func1_yn" = "y" ]
+		then
+			cat ./$2 | awk -F, '$1=="Heung-Min Son"{printf("Team:%s, Apperance:%d, Goal:%d, Assist:%d\n",$4, $6, $7, $8)}'
+		elif [ "$func1_yn" = "n" ]
+		then
+			continue
+		else
+			echo "Error: Invalid option..."
+			continue
+		fi;;
 	2)
 		;;
 	3)
