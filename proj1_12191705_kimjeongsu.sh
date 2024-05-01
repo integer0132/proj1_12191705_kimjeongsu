@@ -57,7 +57,28 @@ do
 			continue
 		fi;;
 	3)
-		;;
+		read -p "Do you want to know Top-3 attendance data and average attendance? (y/n) : " func3_yn
+
+		if [ "$func3_yn" = "y" ]
+		then
+			echo "***Top-3 Attendance Match***"
+			
+			n=1
+
+			while [ $n -le 3 ]
+			do
+				echo ""
+				cat ./$3 | sort -t, -r -n -k 2 | awk -F, -v nn=$n 'NR==nn{printf("%s vs %s (%s)\n%d %s\n",$3, $4, $1, $2, $7)}'
+				n=$(( n+1 ))
+			done
+
+		elif [ "$func3_yn" = "n" ]
+		then
+			continue
+		else
+			echo "Error: Invalid option..."
+			continue
+		fi;;
 	4)
 		;;
 	5)
