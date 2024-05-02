@@ -93,8 +93,6 @@ do
 				cat ./$2 | awk -F, -v tn="$team_name" 'tn==$4{printf("%s,%s\n", $1, $7)}' | sort -t, -r -n -k 2 | awk -F, 'NR==1{print $1, $2}'
 				n4=$(( n4+1 ))
 			done
-
-
 		elif [ "$func4_yn" = "n" ]
 		then
 			continue
@@ -103,7 +101,18 @@ do
 			continue
 		fi;;
 	5)
-		;;
+		read -p "Do you want to modify the format of date? (y/n) : " func5_yn
+
+		if [ "$func5_yn" = "y" ]
+		then
+		cat ./$3 | sed -Ene 's/\,/ /' -Ene 's/([A-Z][a-z]{2}) ([0-9]{2}) ([0-9]{4}) ([-]) ([0-9][0-9]?[:][0-9]{2}[ap][m]) (.*)/\3\/\1\/\2 \5/' -Ene 's/Aug/08/g' -Ene 's/Sep/09/g' -Ene 's/Oct/10/g' -Ene 's/Nov/11/g' -Ene 's/Dec/12/g' -Ene 's/Jan/01/g' -Ene 's/Feb/02/g' -Ene 's/Mar/03/g' -Ene 's/Apr/04/g' -Ene 's/may/05/g' -Ene 's/Jun/06/g' -Ene 's/Jul/07/g' -Ene '2,11p'
+		elif [ "$func5_yn" = "n" ]
+		then
+			continue
+		else
+			echo "Error: Invalid option..."
+			continue
+		fi;;
 	6)
 		;;
 	7)
