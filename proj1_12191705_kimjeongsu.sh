@@ -71,7 +71,6 @@ do
 				cat ./$3 | sort -t, -r -n -k 2 | awk -F, -v nn=$n 'NR==nn{printf("%s vs %s (%s)\n%d %s\n",$3, $4, $1, $2, $7)}'
 				n=$(( n+1 ))
 			done
-
 		elif [ "$func3_yn" = "n" ]
 		then
 			continue
@@ -80,7 +79,29 @@ do
 			continue
 		fi;;
 	4)
-		;;
+		read -p "Do you want to get each team's ranking and the highest-scoring player? (y/n) : " func4_yn
+
+		if [ "$func4_yn" = "y" ]
+		then
+			n4=2
+
+			while [ $n4 -le 21 ]
+			do
+				echo ""
+				team_name=$(cat ./$1 | sort -t, -n -k 6 | awk -F, -v nn4=$n4 'NR==nn4{print $1}')
+				cat ./$1 | sort -t, -n -k 6 | awk -F, -v nn44=$n4 'NR==nn44{print $6, $1}'
+				cat ./$2 | awk -F, -v tn="$team_name" 'tn==$4{printf("%s,%s\n", $1, $7)}' | sort -t, -r -n -k 2 | awk -F, 'NR==1{print $1, $2}'
+				n4=$(( n4+1 ))
+			done
+
+
+		elif [ "$func4_yn" = "n" ]
+		then
+			continue
+		else
+			echo "Error: Invalid option..."
+			continue
+		fi;;
 	5)
 		;;
 	6)
