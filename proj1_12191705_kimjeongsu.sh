@@ -118,8 +118,8 @@ do
 
 		while [ "$n6" -le 10 ]
 		do
-			cat ./$1 | awk -F, -v temp_n6="$n6" 'NR==temp_n6{printf("%d) %-25s\t", temp_n6, $1)}'
-			cat ./$1 | awk -F, -v temp_n6="$n6" 'NR==temp_n6+10{printf("%d) %-25s\n", temp_n6+10, $1)}'
+			cat ./$1 | awk -F, -v temp_n6="$n6" 'NR==temp_n6+1{printf("%d) %-25s\t", temp_n6, $1)}'
+			cat ./$1 | awk -F, -v temp_n6="$n6" 'NR==temp_n6+11{printf("%d) %-25s\n", temp_n6+10, $1)}'
 			n6=$(( n6+1 ))
 		done
 
