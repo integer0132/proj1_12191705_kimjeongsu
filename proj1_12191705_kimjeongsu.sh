@@ -43,7 +43,7 @@ do
 	2)
 		read -p "What do you want to get the team data of league_position[1~20] : " func2_num
 		
-		if [ "$func2_num" -ge 1 ]
+		if [ -n "$func2_num" ] && [ "$func2_num" -ge 1 ]
 		then
 			if [ "$func2_num" -le 20 ]
 			then
@@ -114,7 +114,45 @@ do
 			continue
 		fi;;
 	6)
-		;;
+		n6=1
+######
+		while [ "$n6" -le 10 ]
+		do
+			cat ./$1 | awk -F, -v temp_n6="$n6" 'NR==temp_n6{printf("%d) %-25s\t", temp_n6, $1)}'
+			cat ./$1 | awk -F, -v temp_n6="$n6" 'NR==temp_n6+10{printf("%d) %-25s\n", temp_n6+10, $1)}'
+			n6=$(( n6+1 ))
+		done
+######
+		read -p "Enter your team number : " func6_num
+		
+		if [ -n "$func6_num" ] && [ "$func6_num" -ge 1 ]
+		then
+			if [ "$func6_num" -le 20 ]
+			then
+				team_name6=$(cat ./$1 | awk -F, -v nn6=$((func6_num+1)) 'NR==nn6{print $1}')
+				
+				max6=0
+
+				for v in $(cat ./$3 | awk -F, -v tn6="$team_name6" '$3==tn6{printf("%d,%d\n", $5, $6)}')
+				do
+					temp66=$(echo $v | awk -F, '{print ($1-$2)}')
+					
+					if [ "$max6" -lt "$temp66" ]
+					then
+						max6=$temp66
+					fi
+				done
+
+				cat ./$3 | awk -F, -v tn66="$team_name6" -v m6="$max6" '$3==tn66 && $5-$6==m6{printf("\n%s\n%s %d vs %d %s\n", $1, $3, $5, $6, $4)}'
+				
+			else
+				echo "Error: Invalid option..."
+				continue
+			fi
+		else
+			echo "Error: Invalid option..."
+			continue
+		fi;;
 	7)
 		echo "Bye!"
 		echo ""
